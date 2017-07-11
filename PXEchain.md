@@ -242,9 +242,9 @@ firewall-cmd --add-port=4011/udp --permanent
 firewall-cmd --reload
 ```
 
-The ftp files can be viewed from other computers on the network by going to ftp://192.168.1.15/pub with a web browser.
+The ftp files can be viewed from other computers on the network by going to ftp://192.168.1.15/pub with a web browser.  Login is not required to view files.  The default selinux configuration will block other users on the network from adding files through ftp.
 
-- Test client machine should be able to now boot through the WDS server to the GNU/Linux PXE server.
+- Test client machine should be able to now boot through the WDS server to the GNU/Linux PXE server.  Once you have tested this process and have a good working knowledge of all of the parts, implement this into production to expand the functionality of your servers.
 
 # [Other uses for pxechn.c32](#other-uses-for-pxechn.c32)
 
