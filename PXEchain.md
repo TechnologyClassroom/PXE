@@ -63,14 +63,15 @@ DEFAULT menu.c32
 MENU TITLE WDS PXE Server
 PROMPT 0
 TIMEOUT 100 # 10 seconds
- 
+MENU IMMEDIATE
+
 LABEL wds
   MENU DEFAULT
   MENU LABEL ^Windows Deployment Services (WDS)
   KERNEL pxeboot.0
- 
+
 LABEL gnulinuxpxe
-  MENU LABEL GNU/^Linux PXE Server
+  MENU LABEL ^GNU/Linux PXE Server
   KERNEL pxechn.c32
   APPEND 192.168.1.15::pxelinux.0
 
@@ -215,23 +216,20 @@ PROMPT 0
 TIMEOUT 300
 ONTIMEOUT 2
 MENU TITLE GNU/Linux PXE Server
+MENU IMMEDIATE
 
-LABEL 1
+LABEL centos
   MENU LABEL Install ^CentOS 7 x64 with Local Repo
   KERNEL centos7/vmlinuz
   APPEND initrd=centos7/initrd.img method=ftp://192.168.1.15/pub/centos7 devfs=nomount
 
-LABEL 2
-  MENU LABEL Boot from ^Local Computer
-  LOCALBOOT 0
-
-LABEL 99
+LABEL wds
   MENU LABEL Chain to ^Windows Deployment Server (WDS)
   KERNEL pxechn.c32
   APPEND 192.158.1.2::boot\x64\pxelinux.0 -W
 ```
 
-```LABEL 99``` chains back to the WDS server.  This also illustrates how to do the opposite configuration.  If you have an environment with a GNU/Linux PXE server that handles DHCP and DNS that needs to chain to a WDS server that does not have DHCP and DNS, change ```pxelinux.0``` to ```pxeboot.com``` or install syslinux on both and use the exact code from above.
+```LABEL wds``` chains back to the WDS server.  This also illustrates how to do the opposite configuration.  If you have an environment with a GNU/Linux PXE server that handles DHCP and DNS that needs to chain to a WDS server that does not have DHCP and DNS, change ```pxelinux.0``` to ```pxeboot.com``` or install syslinux on both and use the exact code from above.
 
 - Open ports on the firewall
 
