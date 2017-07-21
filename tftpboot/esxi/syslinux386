@@ -1,0 +1,4 @@
+Insert syslinux 3.86 files here:
+
+menu.c32
+pxelinux.0
