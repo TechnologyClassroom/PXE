@@ -1,0 +1,9 @@
+Insert syslinux 6.03 files here:
+
+ldlinux.c32
+libcom32.c32
+libutil.c32
+mboot.c32 (This was for esxi testing.  I think this is safe to remove.)
+pxechn.c32
+pxelinux.0
+vesamenu.c32
