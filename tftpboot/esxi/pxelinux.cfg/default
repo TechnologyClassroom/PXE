@@ -1,0 +1,50 @@
+DEFAULT menu.c32
+MENU TITLE VMware vSphere Hypervisor (ESXi) SYSLINUX 3.86
+NOHALT 1
+PROMPT 0
+
+LABEL 65a
+  MENU LABEL ESXi v^6.5.0a
+  KERNEL /65a/mboot.c32
+  APPEND -c /65a/boot.cfg
+
+LABEL 65aks
+  MENU LABEL ESXi v6.5.0a ^kickstart firstdisk (BROKEN)
+  KERNEL /65a/mboot.c32
+  APPEND -c /65a/boot.cfg ks=ftp://10.12.17.15/pub/ks/65.cfg
+
+LABEL 60U2
+  MENU LABEL ESXi v6.0U^2
+  KERNEL /60U2/mboot.c32
+  APPEND -c /60U2/boot.cfg
+
+LABEL 60U2ks
+  MENU LABEL ESXi v6.0U2 k^ickstart (BROKEN)
+  KERNEL /60U2/mboot.c32
+  APPEND -c /60U2/boot.cfg ks=ftp://10.12.17.15/pub/ks/65.cfg
+
+LABEL 60U1
+  MENU LABEL ESXi v6.0U^1 (UNTESTED)
+  KERNEL esxi/60U1/mboot.c32
+  APPEND -c esxi/60U1/boot.cfg
+
+LABEL 60
+  MENU LABEL ESXi v6.^0 (UNTESTED)
+  KERNEL /60/mboot.c32
+  APPEND -c /60/boot.cfg
+
+LABEL 55U3
+  MENU LABEL ESXi v^5.5U3 (UNTESTED)
+  KERNEL /55U3/mboot.c32
+  APPEND -c /55U3/boot.cfg
+
+#LABEL 603back
+#  MENU LABEL Chain to ^GNU/Linux PXE Server Main Menu (UNTESTED)
+#  KERNEL pxechain.com
+#  APPEND 10.12.17.15::pxelinux.0
+#
+#  text help
+#                                        This link will go back to
+#                                        the previous menu at
+#                                        the 10.12.17.15 address.
+#  endtext
