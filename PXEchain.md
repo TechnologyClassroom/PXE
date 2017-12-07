@@ -244,9 +244,86 @@ The ftp files can be viewed from other computers on the network by going to ftp:
 
 - Allow ftp and tftp connections through SELinux
 
+```
+setsebool -P ftpd_full_access=0
+setsebool -P tftp_anon_write=1
+setsebool -P tftp_home_dir=1
+setsebool -P allow_ftpd_full_access 1
+```
+
 - Test client machine should be able to now boot through the WDS server to the GNU/Linux PXE server.
 
 Once you have tested this process and have a good working knowledge of all of the parts, implement this into production to expand the functionality of your servers.
+
+# (Optional) Configure nfs for More Distributions
+
+Install nfs-utils
+
+```
+yum install -y nfs-utils
+```
+
+Create the nfs directory
+
+```
+/var/nfs/grml
+```
+
+Extract files or a distro to that directory.  This is a similar process as the process for CentOS-7-x86_64-Minimal-1611.iso above.
+
+Add a new entry to exports
+
+```
+echo "/var/nfs/grml      *(ro,async)" >> /etc/exports
+```
+
+Note: * can be changed to your subnet for added security.  Mine is 10.12.17.0/24
+
+Update nfs table
+
+```
+exportfs -a
+```
+
+Enable nfs services
+
+```
+systemctl enable rpcbind
+systemctl enable nfs-server
+systemctl enable nfs-lock
+systemctl enable nfs-idmap
+```
+
+Start nfs services
+
+```
+systemctl start rpcbind
+systemctl start nfs-server
+systemctl start nfs-lock
+systemctl start nfs-idmap
+```
+
+Probe the portmapper on host
+
+```
+rpcinfo -p
+```
+
+Enable all of the ports in the firewall for these entries: portmapper, mountd, nfs, nlockmgr
+
+Note: Your ports may be different!
+```
+firewall-cmd --add-port=2049/udp --permanent
+firewall-cmd --add-port=2049/tcp --permanent
+firewall-cmd --add-port=43999/upd --permanent
+firewall-cmd --add-port=43999/udp --permanent
+firewall-cmd --add-port=32957/tcp --permanent
+firewall-cmd --add-port=111/tcp --permanent
+firewall-cmd --add-port=111/udp --permanent
+firewall-cmd --add-port=20048/tcp --permanent
+firewall-cmd --add-port=20048/udp --permanent
+firewall-cmd --reload
+```
 
 # [Other uses for pxechn.c32](#other-uses-for-pxechn.c32)
 
