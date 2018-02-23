@@ -1,4 +1,4 @@
-# Setting up two or more PXE servers on the same network: WDS and GNU/Linux PXE Server
+# [Setting up two or more PXE servers on the same network: WDS and GNU/Linux PXE Server](https://github.com/TechnologyClassroom/PXE/blob/master/PXEchain.md#setting-up-two-or-more-pxe-servers-on-the-same-network-wds-and-gnulinux-pxe-server)
 
 Michael McMahon
 
@@ -20,9 +20,10 @@ Requirements:
 * A switch
 * Network cables to connect the four boxes
 
-# [Configuring the WDS server with syslinux](#configuring-the-wds-server-with-syslinux)
+## [Configuring the WDS server with syslinux](https://github.com/TechnologyClassroom/PXE/blob/master/PXEchain.md#configuring-the-wds-server-with-syslinux)
 
-- <a href="https://www.kernel.org/pub/linux/utils/boot/syslinux/6.xx/syslinux-6.03.zip">Download syslinux 6.03 from the official source</a> and extract these eight files to C:\RemoteInstall\Boot\x64\ your tftp location without their folder structure:
+- [Download syslinux 6.03 from the official source](https://www.kernel.org/pub/linux/utils/boot/syslinux/6.xx/syslinux-6.03.zip)
+  and extract these eight files to C:\RemoteInstall\Boot\x64\ your tftp location without their folder structure:
 
 ```
 /bios/com32/chain/chain.c32
@@ -116,7 +117,7 @@ This changes the default boot option from ```pxeboot.com``` to ```pxelinux.0``` 
 
 - If everything is configured correctly, the client should be able to PXE into the WDS and see the new menu.  All options except for the second option should work at this time.
 
-# [Configuring a CentOS 7 PXE server without DHCP or DNS](#configuring-a-centos-7-pxe-server-without-dhcp-or-dns)
+## [Configuring a CentOS 7 PXE server without DHCP or DNS](https://github.com/TechnologyClassroom/PXE/blob/master/PXEchain.md#configuring-a-centos-7-pxe-server-without-dhcp-or-dns)
 
 This portion is modified from Matei Cezar's article at https://www.tecmint.com/install-pxe-network-boot-server-in-centos-7/
 
@@ -124,17 +125,13 @@ This portion is modified from Matei Cezar's article at https://www.tecmint.com/i
 - Login as root.
 - Update the system.
 
-```
-yum update -y
-```
+```yum update -y```
 
 - Configure your network with the static IP that you used before and the same gateway as the WDS.
 
-```
-nmtui
-```
+```nmtui```
 
-- Install tftp and ftp and extra software
+- Install tftp and ftp and extra software.
 
 ```
 yum groups install -y Development\ Tools
@@ -147,33 +144,29 @@ yum install -y nano
 yum install -y tmux
 ```
 
-- Enable and start services
+- Enable and start services.
 
 ```
 systemctl enable xinetd tftp vsftpd
 systemctl start xinetd tftp vsftpd
 ```
 
-- Make a new directory for syslinux and change into that directory
+- Make a new directory for syslinux and change into that directory.
 
 ```
 mkdir syslinux
 cd syslinux
 ```
 
-- Download syslinux
+- Download syslinux.
 
-```
-wget https://www.kernel.org/pub/linux/utils/boot/syslinux/6.xx/syslinux-6.03.zip
-```
+```wget https://www.kernel.org/pub/linux/utils/boot/syslinux/6.xx/syslinux-6.03.zip```
 
-- Unzip syslinux
+- Unzip syslinux.
 
-```
-unzip syslinux-6.03.zip
-```
+```unzip syslinux-6.03.zip```
 
-- Copy the necessary files from syslinux to your tftp directory
+- Copy the necessary files from syslinux to your tftp directory.
 
 ```
 cp bios/com32/chain/chain.c32 /var/lib/tftpboot/
@@ -186,7 +179,7 @@ cp bios/com32/libutil/libutil.c32 /var/lib/tftpboot/
 cp bios/core/pxelinux.0 /var/lib/tftpboot/
 ```
 
-- Example of setting up a CentOS 7 minimal setup for PXE booting
+- Example of setting up a CentOS 7 minimal setup for PXE booting:
 
 ```
 wget http://mirror.pac-12.org/7/isos/x86_64/CentOS-7-x86_64-Minimal-1611.iso # Download an ISO
@@ -208,7 +201,7 @@ touch /var/lib/tftpboot/pxelinux.cfg/default
 nano /var/lib/tftpboot/pxelinux.cfg/default
 ```
 
-- Example default file
+- Example default file:
 
 ```
 DEFAULT menu.c32
@@ -231,7 +224,7 @@ LABEL wds
 
 ```LABEL wds``` chains back to the WDS server.  This also illustrates how to do the opposite configuration.  If you have an environment with a GNU/Linux PXE server that handles DHCP and DNS that needs to chain to a WDS server that does not have DHCP and DNS, change ```pxelinux.0``` to ```pxeboot.com``` or install syslinux on both and use the exact code from above.
 
-- Open ports on the firewall
+- Open ports on the firewall.
 
 ```
 firewall-cmd --add-service=ftp --permanent
@@ -255,37 +248,29 @@ setsebool -P allow_ftpd_full_access 1
 
 Once you have tested this process and have a good working knowledge of all of the parts, implement this into production to expand the functionality of your servers.
 
-# (Optional) Configure nfs for More Distributions
+## [(Optional) Configure nfs for More Distributions](https://github.com/TechnologyClassroom/PXE/blob/master/PXEchain.md#optional-configure-nfs-for-more-distributions)
 
-Install nfs-utils
+Install nfs-utils.
 
-```
-yum install -y nfs-utils
-```
+```yum install -y nfs-utils```
 
-Create the nfs directory
+Create the nfs directory.
 
-```
-/var/nfs/grml
-```
+```mkdir /var/nfs/grml```
 
 Extract files or a distro to that directory.  This is a similar process as the process for CentOS-7-x86_64-Minimal-1611.iso above.
 
-Add a new entry to exports
+Add a new entry to exports.
 
-```
-echo "/var/nfs/grml      *(ro,async)" >> /etc/exports
-```
+```echo "/var/nfs/grml      *(ro,async)" >> /etc/exports```
 
 Note: * can be changed to your subnet for added security.  Mine is 10.12.17.0/24
 
-Update nfs table
+Update nfs table.
 
-```
-exportfs -a
-```
+```exportfs -a```
 
-Enable nfs services
+Enable nfs services.
 
 ```
 systemctl enable rpcbind
@@ -294,7 +279,7 @@ systemctl enable nfs-lock
 systemctl enable nfs-idmap
 ```
 
-Start nfs services
+Start nfs services.
 
 ```
 systemctl start rpcbind
@@ -303,15 +288,14 @@ systemctl start nfs-lock
 systemctl start nfs-idmap
 ```
 
-Probe the portmapper on host
+Probe the portmapper on host.
 
-```
-rpcinfo -p
-```
+```rpcinfo -p```
 
 Enable all of the ports in the firewall for these entries: portmapper, mountd, nfs, nlockmgr
 
 Note: Your ports may be different!
+
 ```
 firewall-cmd --add-port=2049/udp --permanent
 firewall-cmd --add-port=2049/tcp --permanent
@@ -325,6 +309,6 @@ firewall-cmd --add-port=20048/udp --permanent
 firewall-cmd --reload
 ```
 
-# [Other uses for pxechn.c32](#other-uses-for-pxechn.c32)
+## [Other uses for pxechn.c32](https://github.com/TechnologyClassroom/PXE/blob/master/PXEchain.md#other-uses-for-pxechnc32)
 
 Some operating systems may require specific versions of syslinux such as VMware vSphere (ESXi) requiring syslinux 3.86.  pxechn.c32 can be used to switch between versions of syslinux within the same tftp directory.
