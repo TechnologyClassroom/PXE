@@ -1,4 +1,8 @@
-<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br>Copyright © Michael McMahon 2017.  Except where otherwise specified, the text on <a href="https://github.com/TechnologyClassroom/PXE/">PXE</a> by Michael McMahon is licensed under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike License 4.0 (International) (CC-BY-SA 4.0)</a>.
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br>
+Copyright © Michael McMahon 2017-2018.  Except where otherwise specified, the
+text on [PXE](https://github.com/TechnologyClassroom/PXE/) by Michael McMahon is
+licensed under the
+[Creative Commons Attribution-ShareAlike License 4.0 (International) (CC-BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/).
 
 License: Creative Commons Attribution-ShareAlike 4.0 International<br>
 Human Readable License: https://creativecommons.org/licenses/by-sa/4.0/<br>

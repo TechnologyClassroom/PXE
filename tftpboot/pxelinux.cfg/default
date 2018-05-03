@@ -105,10 +105,16 @@ LABEL vmware
                                         pxechains to syslinux 3.86
   endtext
 
-#LABEL unix
-#  MENU LABEL Install ^BSD
-#  KERNEL menu.c32
-#  APPEND pxelinux.cfg/bsd.cfg
+LABEL client
+  MENU LABEL Install m^ore operating systems (Coming Soon)
+  KERNEL menu.c32
+  APPEND pxelinux.cfg/other.cfg
+
+  text help
+                                        Arch, BSD, openSUSE, SUSE,
+                                        Slackware, and other distros
+                                        can be found here soon.
+  endtext
 
 LABEL wds
   MENU LABEL Chain to ^Windows Deployment Server (WDS)
@@ -117,6 +123,15 @@ LABEL wds
 
   text help
                                         This link will go back to
-                                        the previous WDS menu at
-                                        the 10.12.17.20 address.
+                                        the previous WDS menu.
+  endtext
+
+LABEL memtest421
+  MENU LABEL ^Memtest86+ v4.21 (beta)
+  LINUX memtest/memtest421black.bin
+
+  text help
+                                        Memtest86+ is a free and open
+                                        memory test.  v4.21 is a test
+                                        of patches to v4.20.
   endtext
