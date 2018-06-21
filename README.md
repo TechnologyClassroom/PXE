@@ -11,4 +11,6 @@ licensed under the
 
 [Setting up two or more PXE servers on the same network: WDS and GNU/Linux PXE Server](https://github.com/TechnologyClassroom/PXE/blob/master/PXEchain.md)
 
+[wdspxechain.bat](https://github.com/TechnologyClassroom/PXE/blob/master/wdspxechain.bat)
+
 [Example TFTP configuration files for multiple distribution PXE server.  My full setup can flash motherboard BIOS, IPMI, RAID controllers, test systems, memtest, and install a variety of operating systems.](https://github.com/TechnologyClassroom/PXE/tree/master/tftpboot)

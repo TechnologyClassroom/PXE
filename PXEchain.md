@@ -33,7 +33,11 @@ Requirements:
 - A switch
 - Network cables to connect the four boxes
 
-## [Configuring the WDS server with syslinux](https://github.com/TechnologyClassroom/PXE/blob/master/PXEchain.md#configuring-the-wds-server-with-syslinux)
+## Configuring the WDS server with syslinux
+
+[wdspxechain.bat](https://github.com/TechnologyClassroom/PXE/blob/master/wdspxechain.bat)
+is a bat script that runs through each step of this guide.  The script assumes
+the second PXE server is 10.12.17.15 and would need to be modified accordingly.
 
 - [Download syslinux 6.03 from the official source](https://www.kernel.org/pub/linux/utils/boot/syslinux/6.xx/syslinux-6.03.zip)
   and extract these eight files to C:\RemoteInstall\Boot\x64\ your tftp location
@@ -146,7 +150,7 @@ which routes to our new menu.
   the WDS and see the new menu.  All options except for the second option should
   work at this time.
 
-## [Configuring a CentOS 7 PXE server without DHCP or DNS](https://github.com/TechnologyClassroom/PXE/blob/master/PXEchain.md#configuring-a-centos-7-pxe-server-without-dhcp-or-dns)
+## Configuring a CentOS 7 PXE server without DHCP or DNS
 
 This portion is modified from Matei Cezar's article at
 https://www.tecmint.com/install-pxe-network-boot-server-in-centos-7/
@@ -213,15 +217,32 @@ cp bios/core/pxelinux.0 /var/lib/tftpboot/
 - Example of setting up a CentOS 7 minimal setup for PXE booting:
 
 ```
-wget http://mirror.pac-12.org/7/isos/x86_64/CentOS-7-x86_64-Minimal-1611.iso # Download an ISO
-mount -o loop CentOS-7-x86_64-Minimal-1611.iso /mnt # Mount the ISO to the /mnt directory
-mkdir /var/lib/tftpboot/centos7 # Create a folder in the tftp directory
-cp /mnt/images/pxeboot/vmlinuz /var/lib/tftpboot/centos7 # Copy the vmlinuz file to tftp
-cp /mnt/images/pxeboot/initrd.img /var/lib/tftpboot/centos7 # Copy the initrd.img file to tftp
-mkdir /var/ftp/pub/centos7 # Create a folder in the ftp directory
-cp -r /mnt/* /var/ftp/pub/centos7/ # Copy the contents of the entire ISO to the ftp
-umount /mnt # Unmount the ISO
-chmod -R 755 /var/ftp/pub # Set permissions on all files in the ftp directory
+# Download an ISO
+wget http://mirror.pac-12.org/7/isos/x86_64/CentOS-7-x86_64-Minimal-1611.iso
+
+# Mount the ISO to the /mnt directory
+mount -o loop CentOS-7-x86_64-Minimal-1611.iso /mnt
+
+# Create a folder in the tftp directory
+mkdir /var/lib/tftpboot/centos7
+
+# Copy the vmlinuz file to tftp
+cp /mnt/images/pxeboot/vmlinuz /var/lib/tftpboot/centos7
+
+# Copy the initrd.img file to tftp
+cp /mnt/images/pxeboot/initrd.img /var/lib/tftpboot/centos7
+
+# Create a folder in the ftp directory
+mkdir /var/ftp/pub/centos7
+
+# Copy the contents of the entire ISO to the ftp
+cp -r /mnt/* /var/ftp/pub/centos7/
+
+# Unmount the ISO
+umount /mnt
+
+# Set permissions on all files in the ftp directory
+chmod -R 755 /var/ftp/pub 
 ```
 
 - Edit your syslinux config file.
@@ -289,7 +310,7 @@ Once you have tested this process and have a good working knowledge of all of
 the parts, implement this into production to expand the functionality of your
 servers.
 
-## [(Optional) Configure nfs for More Distributions](https://github.com/TechnologyClassroom/PXE/blob/master/PXEchain.md#optional-configure-nfs-for-more-distributions)
+## (Optional) Configure nfs for More Distributions
 
 Install nfs-utils.
 
@@ -352,7 +373,7 @@ firewall-cmd --add-port=20048/udp --permanent
 firewall-cmd --reload
 ```
 
-## [Other uses for pxechn.c32](https://github.com/TechnologyClassroom/PXE/blob/master/PXEchain.md#other-uses-for-pxechnc32)
+## Other uses for pxechn.c32
 
 Some operating systems may require specific versions of syslinux such as VMware
 vSphere (ESXi) requiring syslinux 3.86.  pxechn.c32 can be used to switch
