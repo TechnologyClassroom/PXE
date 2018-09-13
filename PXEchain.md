@@ -36,7 +36,7 @@ Requirements:
 ## Configuring the WDS server with syslinux
 
 [wdspxechain.bat](https://github.com/TechnologyClassroom/PXE/blob/master/wdspxechain.bat)
-is a bat script that runs through each step of this guide.  The script assumes
+is a bat script that runs through each step of this section.  The script assumes
 the second PXE server is 10.12.17.15 and would need to be modified accordingly.
 
 - [Download syslinux 6.03 from the official source](https://www.kernel.org/pub/linux/utils/boot/syslinux/6.xx/syslinux-6.03.zip)
@@ -372,6 +372,13 @@ firewall-cmd --add-port=20048/tcp --permanent
 firewall-cmd --add-port=20048/udp --permanent
 firewall-cmd --reload
 ```
+
+## (Optional) Configure nginx for distributing preseed files
+
+[nginxcentos7.sh](https://github.com/TechnologyClassroom/bash/blob/master/nginxcentos7.sh)
+is a bash script I wrote that installs dependencies and compiles nginx from
+source.  Most guides use elrepo to install nginx, but I try to only use the
+default repositories when I can.
 
 ## Other uses for pxechn.c32
 
