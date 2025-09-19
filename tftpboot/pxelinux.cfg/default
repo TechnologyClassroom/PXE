@@ -5,14 +5,14 @@ PROMPT 0
 TIMEOUT 300 # 30 seconds
 MENU IMMEDIATE
 
-LABEL hwtest
-  MENU LABEL Test ^Hardware (Coming Soon)
-
-  text help
-                                        This menu will load a live OS
-                                        that will run a series of HW
-                                        tests on systems in the future.
-  endtext
+#LABEL hwtest
+#  MENU LABEL Test ^Hardware (Coming Soon)
+#
+#  text help
+#                                        This menu will load a live OS
+#                                        that will run a series of HW
+#                                        tests on systems in the future.
+#  endtext
 
 LABEL deb
   MENU LABEL ^Debian based operating systems
@@ -41,16 +41,16 @@ LABEL redhat
 #  KERNEL menu.c32
 #  APPEND pxelinux.cfg/slack.cfg
 
-LABEL fru
-  MENU LABEL Set ^FRU
-  kernel memdisk
-  append initrd=FD12LFRU.img
-
-  text help
-                                        This menu loads a small
-                                        FreeDOS image that will set
-                                        the FRU.
-  endtext
+#LABEL fru
+#  MENU LABEL Set ^FRU
+#  kernel memdisk
+#  append initrd=FD12LFRU.img
+#
+#  text help
+#                                        This menu loads a small
+#                                        FreeDOS image that will set
+#                                        the FRU.
+#  endtext
 
 LABEL bios
   MENU LABEL Flash ^BIOS
@@ -63,14 +63,24 @@ LABEL bios
                                         IPMI, RAID, and more.
   endtext
 
-LABEL memtest420
-  MENU LABEL ^Memtest86+ v4.20
-  LINUX memtest/memtest420.bin
+#LABEL memtest420
+#  MENU LABEL ^Memtest86+ v4.20
+#  LINUX memtest/memtest420.bin
+#
+#  text help
+#                                        Memtest86+ is a free and open
+#                                        memory test. v4.20 works on
+#                                        most hardware including AMD.
+#  endtext
+
+LABEL memtest421
+  MENU LABEL ^Memtest86+ v4.21 (Black)
+  LINUX memtest/memtest421black.bin
 
   text help
                                         Memtest86+ is a free and open
-                                        memory test.  v4.20 works on
-                                        most hardware including AMD.
+                                        memory test. v4.21 is a set of
+                                        custom patches for v4.20.
   endtext
 
 LABEL memtest501
@@ -83,55 +93,45 @@ LABEL memtest501
                                         but does not always work.
   endtext
 
-LABEL client
-  MENU LABEL Install ^Client Image (Coming Soon)
-  KERNEL menu.c32
-  APPEND pxelinux.cfg/client.cfg
+#LABEL client
+#  MENU LABEL Install ^Client Image (Coming Soon)
+#  KERNEL menu.c32
+#  APPEND pxelinux.cfg/client.cfg
+#
+#  text help
+#                                        ISV clients require special
+#                                        disc images.  These links
+#                                        will one day help this.
+#  endtext
 
-  text help
-                                        ISV clients require special
-                                        disc images.  These links
-                                        will one day help this.
-  endtext
+#LABEL vmware
+#  MENU LABEL Install VMware vSphere Hypervisor (^ESXi)
+#  KERNEL pxechn.c32
+#  APPEND /esxi/pxelinux.0 -p /esxi/
+#
+#  text help
+#                                        ESXi is a proprietary
+#                                        hypervisor made by VMware.
+#                                        pxechains to syslinux 3.86
+#  endtext
 
-LABEL vmware
-  MENU LABEL Install VMware vSphere Hypervisor (^ESXi)
-  KERNEL pxechn.c32
-  APPEND /esxi/pxelinux.0 -p /esxi/
+#LABEL client
+#  MENU LABEL Install m^ore operating systems (Coming Soon)
+#  KERNEL menu.c32
+#  APPEND pxelinux.cfg/other.cfg
+#
+#  text help
+#                                        Arch, BSD, openSUSE, SUSE,
+#                                        Slackware, and other distros
+#                                        can be found here soon.
+#  endtext
 
-  text help
-                                        ESXi is a proprietary
-                                        hypervisor made by VMware.
-                                        pxechains to syslinux 3.86
-  endtext
-
-LABEL client
-  MENU LABEL Install m^ore operating systems (Coming Soon)
-  KERNEL menu.c32
-  APPEND pxelinux.cfg/other.cfg
-
-  text help
-                                        Arch, BSD, openSUSE, SUSE,
-                                        Slackware, and other distros
-                                        can be found here soon.
-  endtext
-
-LABEL wds
-  MENU LABEL Chain to ^Windows Deployment Server (WDS)
-  KERNEL pxechn.c32
-  APPEND 10.12.17.20::boot\x64\pxelinux.0 -W
-
-  text help
-                                        This link will go back to
-                                        the previous WDS menu.
-  endtext
-
-LABEL memtest421
-  MENU LABEL ^Memtest86+ v4.21 (beta)
-  LINUX memtest/memtest421black.bin
-
-  text help
-                                        Memtest86+ is a free and open
-                                        memory test.  v4.21 is a test
-                                        of patches to v4.20.
-  endtext
+#LABEL wds
+#  MENU LABEL Chain to ^Windows Deployment Server (WDS)
+#  KERNEL pxechn.c32
+#  APPEND 10.12.17.20::boot\x64\pxelinux.0 -W
+#
+#  text help
+#                                        This link will go back to
+#                                        the previous WDS menu.
+#  endtext
