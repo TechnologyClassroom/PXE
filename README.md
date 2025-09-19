@@ -3,7 +3,7 @@ Instructions and configurations for configuring PXE servers
 
 <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
 
-Copyright © Michael McMahon 2017-2018.  Except where otherwise specified, the
+Copyright © Michael McMahon 2017-2025.  Except where otherwise specified, the
 text on
 [PXE](https://github.com/TechnologyClassroom/PXE/) by Michael McMahon is
 licensed under the
